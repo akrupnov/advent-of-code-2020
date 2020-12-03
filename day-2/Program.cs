@@ -15,7 +15,7 @@ namespace day_2
                 var policySplit = rowSplit[0].Split(' ', StringSplitOptions.RemoveEmptyEntries);
                 var rangeSplit = policySplit[0].Split('-', StringSplitOptions.RemoveEmptyEntries);
 
-                return new {Password = rowSplit[1], PolicyLetter = policySplit[1][0], PolicyMinimal = Convert.ToInt32(rangeSplit[0]), PolicyMaximum = Convert.ToInt32(rangeSplit[1])};
+                return new {Password = rowSplit[1].Trim(), PolicyLetter = policySplit[1][0], PolicyMinimal = Convert.ToInt32(rangeSplit[0]), PolicyMaximum = Convert.ToInt32(rangeSplit[1])};
             }).ToList();
 
             var validCount = passwords.Count(pd => {
@@ -23,7 +23,11 @@ namespace day_2
                 return letterCount >= pd.PolicyMinimal && letterCount <= pd.PolicyMaximum;
             });
 
+            var superValidCount = passwords.Count(pd => pd.Password[pd.PolicyMinimal -1] == pd.PolicyLetter ^ pd.Password[pd.PolicyMaximum - 1] == pd.PolicyLetter);
+
             Console.WriteLine($"Day 2, Task 1: {validCount}");
+            Console.WriteLine($"Day 2, Task 2: {superValidCount}");
+
         }
     }
 }

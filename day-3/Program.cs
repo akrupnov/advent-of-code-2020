@@ -19,8 +19,18 @@ namespace day_3
             }
             ).ToArray();
 
-            var xInc = 3;
-            var yInc = 1;
+            var treeCount = 
+                CountTrees(1, 1, slope) * 
+                CountTrees(3, 1, slope) * 
+                CountTrees(5, 1, slope) * 
+                CountTrees(7, 1, slope) *
+                CountTrees(1, 2, slope) ;
+
+            Console.WriteLine($"Trees {treeCount}");
+        }
+
+        private static Int32 CountTrees(int xInc, int yInc, FieldCell[][] slope)
+        {
             var xRunner = 0;
             var treeCount = 0;
 
@@ -38,7 +48,7 @@ namespace day_3
                 xRunner += xInc;
             }
 
-            Console.WriteLine($"Trees {treeCount}");
+            return treeCount;
         }
     }
 }
